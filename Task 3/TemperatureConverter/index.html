@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium Temperature Converter — Celsius, Fahrenheit, Kelvin. Built by Dharmit Monani." />
+  <title>Temperature Converter</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌡️</text></svg>" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Header -->
+    <header class="app-header">
+      <span class="app-header__icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="52" height="52" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="tGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#a78bfa"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient></defs><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" stroke="url(#tGrad)"/></svg></span>
+      <h1>Temperature Converter</h1>
+      <p class="app-header__sub">// celsius · fahrenheit · kelvin</p>
+    </header>
+
+    <!-- Converter Card -->
+    <div class="card">
+
+      <!-- Input row: value + from unit -->
+      <div class="input-row">
+        <div class="input-group">
+          <label for="tempInput">// input value</label>
+          <input
+            type="number"
+            id="tempInput"
+            class="temp-input"
+            placeholder="Enter temperature"
+            autocomplete="off"
+            inputmode="decimal"
+            aria-label="Temperature value"
+          />
+        </div>
+        <div class="unit-select-wrap">
+          <label for="fromUnit">// from</label>
+          <select id="fromUnit" class="unit-select" aria-label="From unit">
+            <option value="celsius">°C</option>
+            <option value="fahrenheit">°F</option>
+            <option value="kelvin">K</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Swap + Convert row -->
+      <div class="action-row">
+        <button class="btn-swap" id="btnSwap" aria-label="Swap units" title="Swap units">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M7 16V4m0 0L3 8m4-4l4 4"/>
+            <path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+          </svg>
+        </button>
+        <button class="btn-convert" id="btnConvert" aria-label="Convert temperature">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+          Convert
+        </button>
+      </div>
+
+      <!-- To unit + Reset row -->
+      <div class="to-row">
+        <div class="unit-select-wrap">
+          <label for="toUnit">// to</label>
+          <select id="toUnit" class="unit-select" aria-label="To unit">
+            <option value="fahrenheit">°F</option>
+            <option value="celsius">°C</option>
+            <option value="kelvin">K</option>
+          </select>
+        </div>
+        <button class="btn-reset" id="btnReset" aria-label="Reset" title="Reset">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+            <path d="M3 3v5h5"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Error message -->
+      <p class="error-msg" id="errorMsg" role="alert" aria-live="polite">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+        <span id="errorText"></span>
+      </p>
+
+      <!-- Keyboard hint -->
+      <div class="keyboard-hint">
+        <span class="kbd">Enter</span>
+        <span>to convert</span>
+        <span style="margin-left:0.5rem">·</span>
+        <span class="kbd">Esc</span>
+        <span>to reset</span>
+      </div>
+
+    </div>
+
+    <!-- Result Card -->
+    <div class="card result-card" id="resultCard">
+      <p class="result-label">// result</p>
+      <div class="result-summary" id="resultSummary"></div>
+      <div class="result-value" id="resultValue">—</div>
+      <div class="result-unit" id="resultUnit"></div>
+
+      <!-- All 3 conversions -->
+      <div class="all-conversions">
+        <div class="conversion-chip" id="chipC">
+          <span class="conversion-chip__val" id="chipCVal">—</span>
+          <span class="conversion-chip__unit">Celsius</span>
+        </div>
+        <div class="conversion-chip" id="chipF">
+          <span class="conversion-chip__val" id="chipFVal">—</span>
+          <span class="conversion-chip__unit">Fahrenheit</span>
+        </div>
+        <div class="conversion-chip" id="chipK">
+          <span class="conversion-chip__val" id="chipKVal">—</span>
+          <span class="conversion-chip__unit">Kelvin</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- History Card -->
+    <div class="card history-card">
+      <div class="history-header">
+        <span class="history-title">// history</span>
+        <button class="btn-clear-history" id="btnClearHistory">Clear</button>
+      </div>
+      <p class="history-empty" id="historyEmpty">No conversions yet.</p>
+      <ul class="history-list" id="historyList"></ul>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      Built by <span>Dharmit Monani</span> · Oasis Infobyte Internship 2026
+    </footer>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

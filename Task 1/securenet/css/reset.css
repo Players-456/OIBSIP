@@ -1,0 +1,78 @@
+/* ============================================
+   RESET.CSS — SecureNet
+   Browser normalization & base defaults
+   ============================================ */
+
+/* 1. Box sizing for all elements */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 2. Root defaults */
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* 3. Body base */
+body {
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeSpeed;
+}
+
+/* 4. Media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 5. Typography inheritance */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 6. Remove list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 7. Link defaults */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 8. Heading defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: 1.2;
+}
+
+/* 9. Button reset */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 10. Prevent text overflow */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
