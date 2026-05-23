@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Premium To-Do App — Dharmit Monani · Oasis Infobyte" />
+  <title>TaskFlow — Premium To-Do</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✅</text></svg>" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Delete Confirm Modal -->
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <div class="modal-icon">🗑️</div>
+    <h2 class="modal-title">Delete Task?</h2>
+    <p class="modal-desc">This action cannot be undone. The task will be permanently removed.</p>
+    <div class="modal-task-preview" id="modalTaskPreview"></div>
+    <div class="modal-actions">
+      <button class="btn-cancel" id="modalCancel">Cancel</button>
+      <button class="btn-confirm-delete" id="modalConfirm">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- App -->
+<div class="app-wrapper">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="app-logo">
+        <div class="app-logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 11 12 14 22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        <h1 class="app-title">Task<span>Flow</span></h1>
+      </div>
+      <p class="app-subtitle">// premium task management · oasis infobyte</p>
+    </div>
+
+    <!-- Progress Card -->
+    <div class="progress-card">
+      <div class="progress-top">
+        <span class="progress-label">// progress</span>
+        <span class="progress-count" id="progressCount"><span id="doneCount">0</span> / <span id="totalCount">0</span></span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-stats">
+        <div class="progress-stat">
+          <div class="progress-stat-dot pending"></div>
+          <span id="pendingCount">0</span> pending
+        </div>
+        <div class="progress-stat">
+          <div class="progress-stat-dot completed"></div>
+          <span id="completedCount">0</span> completed
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Add Task Card -->
+  <div class="add-task-card">
+    <div class="add-task-top">
+      <input
+        type="text"
+        class="task-input"
+        id="taskInput"
+        placeholder="What needs to be done? (Enter to add)"
+        maxlength="120"
+        autocomplete="off"
+        aria-label="New task input"
+      />
+      <button class="btn-add-task" id="btnAddTask" aria-label="Add task">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+        Add Task
+      </button>
+    </div>
+    <div class="add-task-options">
+      <select class="option-select" id="prioritySelect" aria-label="Priority">
+        <option value="medium">⚡ Medium</option>
+        <option value="high">🔴 High</option>
+        <option value="low">🔵 Low</option>
+      </select>
+      <input type="date" class="date-input" id="dueDateInput" aria-label="Due date" />
+      <span class="char-count" id="charCount">0 / 120</span>
+    </div>
+
+    <!-- Keyboard hints -->
+    <div class="kb-hints">
+      <div class="kb-hint"><kbd class="kbd">Enter</kbd> Add task</div>
+      <div class="kb-hint"><kbd class="kbd">Esc</kbd> Clear input</div>
+      <div class="kb-hint"><kbd class="kbd">Ctrl+F</kbd> Focus search</div>
+    </div>
+  </div>
+
+  <!-- Toolbar: Search + Filters -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        type="search"
+        class="search-input"
+        id="searchInput"
+        placeholder="Search tasks..."
+        aria-label="Search tasks"
+      />
+    </div>
+    <div class="filter-tabs" role="tablist" aria-label="Filter tasks">
+      <button class="filter-tab active" data-filter="all"      role="tab">All</button>
+      <button class="filter-tab"        data-filter="pending"  role="tab">Pending</button>
+      <button class="filter-tab"        data-filter="completed"role="tab">Done</button>
+      <button class="filter-tab"        data-filter="high"     role="tab">🔴 High</button>
+    </div>
+  </div>
+
+  <!-- Task Sections -->
+  <div class="tasks-layout">
+
+    <!-- Pending Tasks -->
+    <section class="task-section" aria-label="Pending tasks">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-dot pending"></span>
+          Pending Tasks
+        </div>
+        <span class="section-badge pending" id="pendingBadge">0</span>
+      </div>
+      <ul class="task-list" id="pendingList" aria-label="Pending task list">
+        <!-- Tasks rendered by JS -->
+      </ul>
+    </section>
+
+    <!-- Completed Tasks -->
+    <section class="task-section" aria-label="Completed tasks">
+      <div class="section-header">
+        <div class="section-title">
+          <span class="section-dot completed"></span>
+          Completed Tasks
+        </div>
+        <span class="section-badge completed" id="completedBadge">0</span>
+      </div>
+      <ul class="task-list" id="completedList" aria-label="Completed task list">
+        <!-- Tasks rendered by JS -->
+      </ul>
+    </section>
+
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
