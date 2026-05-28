@@ -41,6 +41,18 @@ const userSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    // Forgot-password: hashed reset token stored in DB
+    passwordResetToken: {
+      type:   String,
+      default: null,
+      select:  false, // never expose in normal queries
+    },
+    // Forgot-password: token expiry (10 minutes from request)
+    passwordResetExpires: {
+      type:   Date,
+      default: null,
+      select:  false,
+    },
   },
   {
     timestamps: true, // adds createdAt and updatedAt automatically
@@ -65,6 +77,27 @@ userSchema.pre('save', async function (next) {
  */
 userSchema.methods.comparePassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
+};
+
+/* ── Instance Method: Generate reset token ────── */
+/**
+ * Creates a plain-text random token, hashes it with SHA-256,
+ * stores the HASH in the DB (never the plain token),
+ * returns the PLAIN token to be emailed to the user.
+ */
+userSchema.methods.generatePasswordResetToken = function () {
+  const crypto = require('crypto');
+
+  // 1. Generate 32 random bytes → hex string (this goes in the email URL)
+  const resetToken = crypto.randomBytes(32).toString('hex');
+
+  // 2. Hash it — only the hash lives in the DB
+  this.passwordResetToken   = crypto.createHash('sha256').update(resetToken).digest('hex');
+
+  // 3. Expires in 10 minutes
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetToken; // plain token → goes into the email link
 };
 
 module.exports = mongoose.model('User', userSchema);
