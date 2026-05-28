@@ -401,6 +401,13 @@ body {
   min-width: 260px;
 }
 
+.hero__image {
+  width: 100%;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  box-shadow: var(--shadow-md);
+}
+
 .hero__code-card {
   background: var(--clr-bg-card);
   border: 1px solid var(--clr-border);
@@ -478,6 +485,15 @@ body {
   box-shadow: var(--shadow-glow);
   position: relative;
   overflow: hidden;
+}
+
+.about__avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+  position: relative;
+  z-index: 1;
 }
 
 .about__avatar::before {
@@ -663,7 +679,6 @@ body {
   background: var(--clr-bg-card);
   border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -686,6 +701,21 @@ body {
   box-shadow: var(--shadow-glow);
 }
 .project-card:hover::after { opacity: 1; }
+
+.project-card__thumbnail {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.project-card__body {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
 
 .project-card__header {
   display: flex;
@@ -761,6 +791,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  padding: 0; /* Reset padding for featured grid layout if needed */
 }
 .project-card--featured .project-card__visual {
   background: var(--clr-bg-elevated);

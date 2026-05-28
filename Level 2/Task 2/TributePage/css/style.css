@@ -62,7 +62,10 @@ body {
   padding-inline: 1.5rem;
 }
 
-.section { padding-block: 6rem; }
+.section {
+  padding-block: 7rem;
+  transition: background-color var(--t-slow);
+}
 
 /* ── REVEAL ANIMATIONS ───────────────────────── */
 .reveal {
@@ -253,20 +256,20 @@ body {
 
 .hero-name {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 900;
   color: var(--text-primary);
-  letter-spacing: -0.03em;
-  line-height: 1.0;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin-bottom: 0.75rem;
 }
 .hero-title {
   font-family: var(--font-elegant);
-  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  font-size: clamp(1.2rem, 3.5vw, 1.8rem);
   font-style: italic;
   color: var(--gold);
   letter-spacing: 0.05em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 }
 .hero-dates {
   font-size: 0.8rem;
@@ -275,9 +278,9 @@ body {
   margin-bottom: 2rem;
 }
 .hero-desc {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  max-width: 480px;
+  font-size: 1.1rem;
+  line-height: 1.9;
+  max-width: 520px;
   margin-bottom: 2.5rem;
 }
 

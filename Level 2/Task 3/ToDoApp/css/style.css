@@ -7,12 +7,12 @@
 
 /* ── TOKENS ─────────────────────────────────── */
 :root {
-  --bg:            #07070f;
-  --bg-surface:    #0c0c18;
-  --bg-elevated:   #111122;
-  --bg-card:       #0f0f1e;
-  --border:        rgba(255,255,255,0.06);
-  --border-accent: rgba(124,58,237,0.3);
+  --bg:            #f8fafc;
+  --bg-surface:    #f1f5f9;
+  --bg-elevated:   #ffffff;
+  --bg-card:       #ffffff;
+  --border:        rgba(0,0,0,0.08);
+  --border-accent: rgba(124,58,237,0.4);
 
   --violet:        #7c3aed;
   --violet-light:  #a78bfa;
@@ -31,9 +31,9 @@
   --grad-green:    linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
   --grad-amber:    linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
 
-  --text-primary:   #f0f0f8;
-  --text-secondary: #8b8ba7;
-  --text-muted:     #44445a;
+  --text-primary:   #0f172a;
+  --text-secondary: #475569;
+  --text-muted:     #64748b;
 
   --font-display: 'Space Grotesk', sans-serif;
   --font-body:    'Inter', sans-serif;
@@ -43,9 +43,9 @@
   --r-lg:   18px;  --r-xl:  24px;
   --r-full: 9999px;
 
-  --shadow-card: 0 4px 24px rgba(0,0,0,0.5);
-  --shadow-glow: 0 0 32px rgba(124,58,237,0.2);
-  --shadow-cyan: 0 0 32px rgba(6,182,212,0.15);
+  --shadow-card: 0 4px 20px rgba(0,0,0,0.06);
+  --shadow-glow: 0 0 24px rgba(124,58,237,0.15);
+  --shadow-cyan: 0 0 24px rgba(6,182,212,0.15);
 
   --t-fast:   130ms ease;
   --t-base:   240ms ease;
@@ -178,7 +178,7 @@ body::after {
 
 .progress-bar-track {
   height: 6px;
-  background: rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.06);
   border-radius: var(--r-full);
   overflow: hidden;
 }
@@ -231,7 +231,7 @@ body::after {
 
 .task-input {
   flex: 1;
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.02);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 0.75rem 1rem;
@@ -273,7 +273,7 @@ body::after {
 }
 
 .option-select {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.02);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 0.5rem 0.85rem;
@@ -289,10 +289,10 @@ body::after {
   padding-right: 1.75rem;
 }
 .option-select:focus { outline: none; border-color: var(--violet); }
-.option-select option { background: #111122; }
+.option-select option { background: #ffffff; }
 
 .date-input {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.02);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 0.5rem 0.85rem;
@@ -379,7 +379,7 @@ body::after {
   color: #fff;
   box-shadow: 0 2px 8px rgba(124,58,237,0.3);
 }
-.filter-tab:not(.active):hover { color: var(--text-secondary); background: rgba(255,255,255,0.05); }
+.filter-tab:not(.active):hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
 
 /* ── TASK SECTIONS ───────────────────────────── */
 .tasks-layout {
@@ -438,10 +438,10 @@ body::after {
   overflow-y: auto;
   padding: 0.5rem;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.06) transparent;
+  scrollbar-color: rgba(0,0,0,0.1) transparent;
 }
 .task-list::-webkit-scrollbar { width: 3px; }
-.task-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.07); border-radius: 99px; }
+.task-list::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 99px; }
 
 /* ── EMPTY STATE ─────────────────────────────── */
 .empty-state {
@@ -496,7 +496,7 @@ body::after {
 }
 .task-item:last-child { margin-bottom: 0; }
 .task-item:hover {
-  border-color: rgba(255,255,255,0.1);
+  border-color: rgba(0,0,0,0.12);
   transform: translateY(-2px);
   box-shadow: var(--shadow-card);
 }
@@ -708,7 +708,7 @@ body::after {
   line-height: 1.6;
 }
 .modal-task-preview {
-  background: rgba(255,255,255,0.04);
+  background: rgba(0,0,0,0.03);
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   padding: 0.6rem 0.875rem;
@@ -736,7 +736,7 @@ body::after {
   font-size: 0.875rem;
   transition: border-color var(--t-fast), background var(--t-fast);
 }
-.btn-cancel:hover { border-color: rgba(255,255,255,0.15); background: rgba(255,255,255,0.04); }
+.btn-cancel:hover { border-color: rgba(0,0,0,0.15); background: rgba(0,0,0,0.04); }
 .btn-confirm-delete {
   padding: 0.65rem 1.5rem;
   background: linear-gradient(135deg, #ef4444, #dc2626);

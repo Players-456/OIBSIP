@@ -15,6 +15,14 @@
   --border:         rgba(255,255,255,0.07);
   --border-accent:  rgba(124,58,237,0.4);
 
+  --border-history: rgba(255,255,255,0.03);
+  --scroll-thumb:   rgba(255,255,255,0.07);
+  --btn-ripple:     rgba(255,255,255,0.12);
+  --btn-sci-bg:     rgba(255,255,255,0.02);
+  --btn-hover-box:  rgba(255,255,255,0.06);
+  --btn-num-hover:  rgba(255,255,255,0.08);
+  --btn-eq-hover:   rgba(255,255,255,0.15);
+
   --violet:         #7c3aed;
   --violet-light:   #a78bfa;
   --cyan:           #06b6d4;
@@ -50,6 +58,28 @@
   --t-bounce: 350ms cubic-bezier(0.34,1.56,0.64,1);
 }
 
+[data-theme="light"] {
+  --bg:             #f8fafc;
+  --bg-grad:        linear-gradient(145deg, #ffffff 0%, #f1f5f9 50%, #e2e8f0 100%);
+  --surface:        #ffffff;
+  --surface-hover:  #f8fafc;
+  --surface-active: #f1f5f9;
+  --border:         #e2e8f0;
+  --text-primary:   #0f172a;
+  --text-secondary: #334155;
+  --text-muted:     #64748b;
+  --shadow-glass:   0 10px 30px rgba(0,0,0,0.08);
+  --shadow-glow:    0 0 30px rgba(124,58,237,0.2);
+
+  --border-history: rgba(0,0,0,0.05);
+  --scroll-thumb:   rgba(0,0,0,0.15);
+  --btn-ripple:     rgba(0,0,0,0.08);
+  --btn-sci-bg:     rgba(0,0,0,0.02);
+  --btn-hover-box:  rgba(0,0,0,0.04);
+  --btn-num-hover:  rgba(0,0,0,0.03);
+  --btn-eq-hover:   rgba(255,255,255,0.3);
+}
+
 /* ── BASE ────────────────────────────────────── */
 body {
   font-family: var(--font-display);
@@ -63,6 +93,7 @@ body {
   padding: 1.5rem 1rem;
   position: relative;
   overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 /* Ambient orbs */
@@ -141,6 +172,7 @@ body::after {
   -webkit-backdrop-filter: blur(24px);
   box-shadow: var(--shadow-glass);
   overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ── DISPLAY ─────────────────────────────────── */
@@ -282,7 +314,7 @@ body::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 65%);
+  background: radial-gradient(circle, var(--btn-ripple) 0%, transparent 65%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -340,7 +372,7 @@ body::after {
   font-size: 0.75rem;
   color: var(--text-secondary);
   height: 52px;
-  background: rgba(255,255,255,0.02);
+  background: var(--btn-sci-bg);
   font-family: var(--font-mono);
 }
 .btn-sci:hover { background: rgba(124,58,237,0.1); color: var(--violet-light); }
@@ -359,6 +391,7 @@ body::after {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   overflow: hidden;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .history-header {
@@ -392,10 +425,10 @@ body::after {
   max-height: 160px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.06) transparent;
+  scrollbar-color: var(--scroll-thumb) transparent;
 }
 .history-list::-webkit-scrollbar { width: 3px; }
-.history-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.07); border-radius: 99px; }
+.history-list::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border-radius: 99px; }
 
 .history-empty {
   font-family: var(--font-mono);
@@ -410,7 +443,7 @@ body::after {
   align-items: center;
   justify-content: space-between;
   padding: 0.6rem 1.25rem;
-  border-bottom: 1px solid rgba(255,255,255,0.03);
+  border-bottom: 1px solid var(--border-history);
   font-family: var(--font-mono);
   font-size: 0.75rem;
   cursor: pointer;
@@ -527,10 +560,10 @@ body::after {
     transform 180ms cubic-bezier(0.34,1.56,0.64,1),
     box-shadow var(--t-fast);
 }
-.btn:hover { box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06); }
-.btn-num:hover  { background: rgba(255,255,255,0.08); }
-.btn-op:hover   { background: rgba(124,58,237,0.18); color: #fff; box-shadow: inset 0 0 0 1px rgba(124,58,237,0.3); }
-.btn-eq:hover   { box-shadow: var(--shadow-glow), inset 0 0 0 1px rgba(255,255,255,0.15); }
+.btn:hover { box-shadow: inset 0 0 0 1px var(--btn-hover-box); }
+.btn-num:hover  { background: var(--btn-num-hover); }
+.btn-op:hover   { background: rgba(124,58,237,0.18); color: var(--violet); box-shadow: inset 0 0 0 1px rgba(124,58,237,0.2); }
+.btn-eq:hover   { box-shadow: var(--shadow-glow), inset 0 0 0 1px var(--btn-eq-hover); }
 .btn-util:hover { background: rgba(245,158,11,0.14); }
 .btn-del:hover  { background: rgba(249,115,22,0.14); }
 .btn.key-active { transform: scale(0.9); background: var(--surface-active); }
